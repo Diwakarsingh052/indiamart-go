@@ -1,3 +1,5 @@
+// keep the package name same as the folder name
+// don-t use upper case and - (dashes)
 package sum
 
 import "fmt"
