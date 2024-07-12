@@ -1,7 +1,10 @@
 package db
 
-import "fmt"
+import (
+	"fmt"
+)
 
+// bad practice, don't put db conneciton in global exported variables
 var Database string = "postgres"
 
 func ReadDB() {
