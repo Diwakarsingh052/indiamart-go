@@ -20,15 +20,22 @@ func greet() {
 
 	name := data[0]
 	ageString := data[1]
-	//marksString := data[2]
+	marksString := data[2]
 	fmt.Println(name, ageString)
 	//var err error // default value is nil // indicates no error
 	//fmt.Println(err)
 	age, err := strconv.Atoi(ageString)
+
 	if err != nil {
 		log.Println("error in conversion", err)
 		return
 	}
-	fmt.Println(age)
+	marks, err := strconv.Atoi(marksString)
+
+	if err != nil {
+		log.Println("error in conversion", err)
+		return
+	}
+	fmt.Println(name, marks, age)
 
 }
