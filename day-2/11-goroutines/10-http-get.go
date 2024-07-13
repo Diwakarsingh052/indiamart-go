@@ -21,6 +21,7 @@ type response struct {
 }
 
 var wg = &sync.WaitGroup{}
+var wgWorker = &sync.WaitGroup{}
 
 func main() {
 	doGetRequest(url)
@@ -36,10 +37,10 @@ func doGetRequest(urls []string) {
 		defer wg.Done()
 
 		for _, v := range urls {
-
+			wgWorker.Add(1)
 			//fanning out go routines // one task = one goroutine
 			go func(url string) {
-
+				defer wgWorker.Done()
 				resp, err := http.Get(url)
 
 				r := response{
@@ -54,7 +55,7 @@ func doGetRequest(urls []string) {
 
 		}
 		//wait for go routines to finish the get request task
-
+		wgWorker.Wait()
 		close(respChan)
 		// when channel is closed no more send can happen // only recv is possible
 
