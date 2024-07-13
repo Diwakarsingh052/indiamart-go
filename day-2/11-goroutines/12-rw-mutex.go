@@ -23,6 +23,9 @@ func (t *Theater) checkSeats() {
 	// Acquire a lock for reading
 	t.rw.RLock()
 	// Releases the read lock when func completes
+
+	//no one can write when read lock is acquired,
+	// there could be unlimited number of reads
 	defer t.rw.RUnlock()
 	fmt.Println("Available Seats:", t.Seats)
 }
