@@ -20,6 +20,6 @@ type Service struct {
 // and returns a new Service with the provided Storer. This design allows creating services with
 // different storers at runtime.
 func NewService(storer storer) Service {
-	s := Service{s: storer}
+	s := Service{storer: storer}
 	return s
 }
