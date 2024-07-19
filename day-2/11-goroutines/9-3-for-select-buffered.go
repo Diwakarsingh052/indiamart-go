@@ -25,6 +25,7 @@ func main() {
 		defer wgWorker.Done()
 		time.Sleep(2 * time.Second)
 		c1 <- 1
+		close(c1)
 
 	}()
 	go func() {
@@ -32,11 +33,13 @@ func main() {
 		time.Sleep(1 * time.Second)
 		c2 <- 2
 		c2 <- 4
+		close(c2)
 
 	}()
 	go func() {
 		defer wgWorker.Done()
 		c3 <- 3
+		close(c3)
 
 	}()
 	wg.Add(1)
@@ -70,6 +73,15 @@ func main() {
 				time.Sleep(6 * time.Second)
 			case <-done:
 				fmt.Println("all goroutines finished sending")
+				for v := range c1 {
+					fmt.Println(v)
+				}
+				for v := range c2 {
+					fmt.Println(v)
+				}
+				for v := range c3 {
+					fmt.Println(v)
+				}
 				return
 			}
 		}
