@@ -13,13 +13,14 @@ func main() {
 
 func Mid(next http.HandlerFunc) http.HandlerFunc {
 
-	return func(w http.ResponseWriter, r *http.Request, a int) {
+	return func(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("middleware invoked")
 		next(w, r)
 	}
 }
 
 func LogMid(next http.HandlerFunc) http.HandlerFunc {
+
 	return func(w http.ResponseWriter, r *http.Request) {
 		log.Println("middleware is called")
 		log.Println("doing middleware specific things")

@@ -7,7 +7,9 @@ import (
 )
 
 func main() {
-	router := gin.Default()
+	//gin.SetMode(gin.ReleaseMode)
+	router := gin.New()
+	router.Use(gin.Recovery(), gin.Logger())
 
 	router.GET("/home/:name", Home)
 	router.Run(":8080")
@@ -21,5 +23,6 @@ func Home(c *gin.Context) {
 	//c.String(http.StatusOK, "this is my home page")
 	//using the map to send the json response
 	c.JSON(http.StatusOK, gin.H{"msg": "this is my home page"})
-	c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{})
+	//panic("gh")
+	//c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{})
 }
