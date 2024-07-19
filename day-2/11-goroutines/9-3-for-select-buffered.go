@@ -7,9 +7,9 @@ import (
 )
 
 func main() {
-	c1 := make(chan int)
-	c2 := make(chan int)
-	c3 := make(chan int)
+	c1 := make(chan int, 4)
+	c2 := make(chan int, 4)
+	c3 := make(chan int, 5)
 	wg := sync.WaitGroup{}
 	// we would close the done channel when all goroutines are finished sending
 	done := make(chan struct{})
