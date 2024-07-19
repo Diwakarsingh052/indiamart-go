@@ -7,7 +7,7 @@ type user struct {
 }
 
 func main() {
-	var i interface{} = "str"
+	var i any = "str"
 	//var a any // any is an alias to interface{}
 	i = 10
 	i = true
