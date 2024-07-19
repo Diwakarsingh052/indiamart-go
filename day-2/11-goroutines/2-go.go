@@ -12,12 +12,11 @@ func main() {
 		wg.Add(1)
 		go work(i, wg)
 	}
-
 	wg.Wait() // We block here until all the goroutines call Done()
 
 }
 
-func work(id int, wg *sync.WaitGroup) int {
+func work(id int, wg *sync.WaitGroup) {
 	defer wg.Done()
 	wg.Add(1)
 	go func() {

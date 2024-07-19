@@ -65,7 +65,7 @@ func main() {
 	}
 
 	// Start 2 bookSeat routines
-	for i := 1; i <= 6; i++ {
+	for i := 1; i <= 10; i++ {
 		wgBook.Add(1) // Increment wait group counter
 		go t.bookSeat("User " + strconv.Itoa(i))
 	}

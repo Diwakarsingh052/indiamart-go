@@ -25,7 +25,7 @@ func main() {
 	go func() {
 		defer wg.Done()
 		c3 <- 3
-		c3 <- 4
+
 	}()
 
 	// the loop has a fixed number of iterations, we are guessing, which is wrong!!
