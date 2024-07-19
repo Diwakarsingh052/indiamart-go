@@ -64,12 +64,18 @@ func main() {
 			// whichever case is not blocking exec that first
 			//whichever case is ready first, exec that.
 			// possible cases are chan recv , send , default
-			case x := <-c1:
-				fmt.Println(x)
-			case x := <-c2:
-				fmt.Println(x)
-			case x := <-c3:
-				fmt.Println(x)
+			case x, ok := <-c1:
+				if ok {
+					fmt.Println(x)
+				}
+			case x, ok := <-c2:
+				if ok {
+					fmt.Println(x)
+				}
+			case x, ok := <-c3:
+				if ok {
+					fmt.Println(x)
+				}
 				time.Sleep(6 * time.Second)
 			case <-done:
 				fmt.Println("all goroutines finished sending")

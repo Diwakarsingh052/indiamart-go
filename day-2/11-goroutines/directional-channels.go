@@ -11,7 +11,6 @@ func sender(c chan<- string) {
 // This function only receives from the channel
 func receiver(c <-chan string) {
 	msg := <-c
-
 	fmt.Println(msg)
 }
 
