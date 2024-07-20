@@ -1,0 +1,14 @@
+services:
+  small-app:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "8080:8000"
+
+
+
+
+#docker-compose up --build -d
+#docker-compose down

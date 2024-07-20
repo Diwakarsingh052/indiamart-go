@@ -22,6 +22,7 @@ func (c *Conn) CreateUser(n NewUser) (User, error) {
 
 	passHash, err := bcrypt.GenerateFromPassword([]byte(n.Password), bcrypt.DefaultCost)
 	if err != nil {
+
 		return User{}, err
 	}
 	us := User{

@@ -3,6 +3,7 @@ package handlers
 import (
 	"github.com/gin-gonic/gin"
 	"net/http"
+	"small-app/middlewares"
 	"small-app/models"
 )
 
@@ -13,7 +14,7 @@ type handler struct {
 func API() *gin.Engine {
 
 	r := gin.New()
-
+	r.Use(gin.Recovery(), middlewares.Logger())
 	//apply middleware to all the endpoints using r.Use
 	c := models.NewConn()
 	h := handler{Conn: c}

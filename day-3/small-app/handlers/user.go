@@ -6,14 +6,19 @@ import (
 	"log/slog"
 	"net/http"
 	"small-app/models"
+	"small-app/pkg/ctxmanage"
 )
 
 func (h *handler) Signup(c *gin.Context) {
 	// Declare a variable to hold decoded data from request body
 	var newUser models.NewUser
+
+	// Get the traceId from the request. Useful for tracking the request in logs
+	traceId := ctxmanage.GetTraceIdOfRequest(c)
+
 	err := c.ShouldBindJSON(&newUser)
 	if err != nil {
-		slog.Error("json validation error", slog.String("TRACE ID", "fake-id"), slog.String("Error", err.Error()))
+		slog.Error("json validation error", slog.String("TRACE ID", traceId), slog.String("Error", err.Error()))
 		// Respond with a 400 Bad Request status code and error message
 		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": http.StatusText(http.StatusBadRequest)})
 
@@ -28,7 +33,7 @@ func (h *handler) Signup(c *gin.Context) {
 
 	// Check if validation encountered errors
 	if err != nil {
-		slog.Error("validation failed", slog.String("TRACE ID", "fake-id"),
+		slog.Error("validation failed", slog.String("TRACE ID", traceId),
 			slog.String("ERROR", err.Error()))
 		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": http.StatusText(http.StatusInternalServerError)})
 		return
@@ -39,7 +44,7 @@ func (h *handler) Signup(c *gin.Context) {
 	// If user fetch operation fails, respond with an error
 	if err != nil {
 
-		slog.Error("error in creating the user", slog.String("Trace ID", "fake-id"),
+		slog.Error("error in creating the user", slog.String("Trace ID", traceId),
 			slog.String("Error", err.Error()))
 		c.JSON(http.StatusInternalServerError, gin.H{"message": "Problem in creating user"})
 		return
