@@ -29,8 +29,6 @@ message CreatePostResponse {
   string result = 1;
 }
 
-
-
 message SignupRequest {
   User user = 1;
 }
@@ -39,10 +37,26 @@ message SignupResponse {
   string result = 1;
 }
 
+
+//proto for server streaming
+message GetPostsRequest {
+  fixed64 user_id = 1;
+}
+message GetPostsResponse {
+  repeated Post posts = 1; // slice of post
+}
+
 service UserService {
   //unary
   rpc Signup(SignupRequest) returns (SignupResponse);
 
   //client streaming
   rpc CreatePost(stream CreatePostRequest) returns (CreatePostResponse);
+
+  //server streaming
+  rpc GetPosts(GetPostsRequest) returns (stream GetPostsResponse);
 }
+
+
+
+
