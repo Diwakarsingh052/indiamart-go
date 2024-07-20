@@ -37,8 +37,8 @@ func AnalyzeText(filename string) (TextAnalysis, error) {
 
 	// s should do the allocation to heap not matter what,
 	//but because of function inlining no allocation if the data could be stored on stack
-	s := CreateLargeBuffer()
-	_ = s
+	//s := CreateLargeBuffer()
+	//_ = s
 
 	// Convert the byte slice of the file content to a string.
 	text := string(content)
