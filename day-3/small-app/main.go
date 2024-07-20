@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"net/http"
+	//_ "net/http/pprof" // this should not go in production
 	"os"
 	"os/signal"
 	"small-app/handlers"
@@ -20,6 +21,8 @@ func main() {
 }
 
 func startApp() error {
+
+	go http.ListenAndServe(":3000", nil)
 	api := http.Server{
 		Addr:         ":8000",
 		ReadTimeout:  8000 * time.Second,
