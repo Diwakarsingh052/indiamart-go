@@ -7,6 +7,8 @@ import (
 	"log"
 )
 
+// docker-compose up --build -d
+
 type Product struct {
 	gorm.Model
 	Code  string `gorm:"unique"`

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body>
+<h1>User List</h1>
+<ul>
+    {{range .}}
+    <li>
+        {{.Name}}, {{.Age}}
+    </li>
+    {{end}}
+</ul>
+</body>
+</html>
