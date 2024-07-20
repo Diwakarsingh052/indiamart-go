@@ -53,6 +53,7 @@ func TestSumIntTableTest(t *testing.T) {
 	}
 
 	for _, tc := range tt {
+		// Use 't.Run()' to execute a sub-test for each test case
 		t.Run(tc.name, func(t *testing.T) {
 			got := SumInt(tc.numbers)
 			require.Equal(t, tc.want, got)
